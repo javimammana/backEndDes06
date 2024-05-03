@@ -9,6 +9,13 @@ const managerCart = new CartManager();
 
 router.get("/", async (req, res) => {
     try {
+
+        if (!req.session.login) {
+            return res.redirect("/login");
+        }
+    
+        const user = req.session.user
+
         const products = await manager.getProducts();
         console.log(products)
         res.render("home", {
@@ -24,6 +31,13 @@ router.get("/", async (req, res) => {
 
 router.get("/products", async (req, res) => {
     try {
+
+        if (!req.session.login) {
+            return res.redirect("/login");
+        }
+    
+        const user = req.session.user
+
         const { query, page, limit, sort } = req.query;
         const products = await manager.getProductsPaginate(limit, page, query, sort);
 
@@ -50,6 +64,7 @@ router.get("/products", async (req, res) => {
             pages,
             sort,
             query,
+            user
         });
 
     } catch (error) {
@@ -104,9 +119,15 @@ router.get("/carts/:cid", async (req, res) => {
 
 router.get("/realtimeproducts", (req, res) => {
     try {
+        if (!req.session.login) {
+            return res.redirect("/login");
+        }
+        const user = req.session.user
+
         res.render("realTimeProducts", {
             title: "Manager de productos",
-            fileCss: "style.css"
+            fileCss: "style.css",
+            user
         });
     } catch (error) {
         res.status(500).json({error: "Error del servidor"});

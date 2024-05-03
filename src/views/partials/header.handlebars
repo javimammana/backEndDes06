@@ -3,19 +3,19 @@
         <nav class="nav">
             <a href="/" class=""> LOGO </a>
             <ul>
-                <li> <a href="/products"> Carrito </a></li>
-                <li> <a href="/messages"> Chat </a></li>
+                <li> <a class="navLink" href="/products"> Carrito </a></li>
+                <li> <a class="navLink" href="/messages"> Chat </a></li>
                 {{#if user}}
-                <li> <a href="/api/sessions/logout">Logout</a></li>
+                <li> <a class="navLogout" href="/api/sessions/logout">Logout</a></li>
                 {{else}}
-                <li> <a href="/login"> Login </a></li>
+                <li> <a class="navLink" href="/login"> Login </a></li>
                 {{/if}}
             </ul>
         </nav>
         <div class="line"></div>
         {{#if user}}
         <div class="navUser">
-            <p>Hola <a href="/profile">{{user.first_name}}</a> ({{user.role}})</p>
+            <p>Hola <a class="navLink" href="/profile">{{user.first_name}}</a> ({{user.role}})</p>
         </div>
         {{/if}}
     </div>
