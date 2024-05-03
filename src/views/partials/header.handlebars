@@ -4,13 +4,19 @@
             <a href="/" class=""> LOGO </a>
             <ul>
                 <li> <a href="/products"> Carrito </a></li>
-                <li> <a href=""> Chat </a></li>
-                <li> <a href=""> Login </a></li>
+                <li> <a href="/messages"> Chat </a></li>
+                {{#if user}}
+                <li> <a href="/api/sessions/logout">Logout</a></li>
+                {{else}}
+                <li> <a href="/login"> Login </a></li>
+                {{/if}}
             </ul>
         </nav>
         <div class="line"></div>
+        {{#if user}}
         <div class="navUser">
-            <p>Hola PABLO ()</p>
+            <p>Hola <a href="/profile">{{user.first_name}}</a> ({{user.role}})</p>
         </div>
+        {{/if}}
     </div>
 </header>

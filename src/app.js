@@ -4,6 +4,7 @@ import { Server } from "socket.io";
 import multer from "multer";
 import cookieParser from "cookie-parser";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 
 //base de datos
 import "./dataBase.js"
@@ -12,6 +13,8 @@ import "./dataBase.js"
 import productRouter from "./routes/product.routes.js";
 import cartRouter from "./routes/cart.routes.js";
 import viewsRouter from "./routes/views.routes.js";
+import sessionRouter from "./routes/session.routes.js";
+import userRouter from "./routes/user.routes.js"
 
 import ChatManager from "./manager/ChatManager.js";
 
@@ -29,6 +32,10 @@ app.use(session({
     secret: "secretClave",
     resave: true, //mantien activa la sesion frente a la inactividad del ususario
     saveUninitialized: true, //permite guardar sesion aun cuando este vacio
+    store: MongoStore.create({
+        mongoUrl: "mongodb+srv://javiermammana:test@coderhouse.vv0r5fa.mongodb.net/eCommerce?retryWrites=true&w=majority&appName=CoderHouse",
+        ttl: 15
+    })
 }))
 
 //Configuramos Multer: 
@@ -53,6 +60,8 @@ app.set("views", "./src/views");
 app.use("/api/products", productRouter);
 app.use("/api/carts", cartRouter);
 app.use("/", viewsRouter);
+app.use("/api/sessions", sessionRouter);
+app.use("/api/users", userRouter);
 
 
 //Servidor

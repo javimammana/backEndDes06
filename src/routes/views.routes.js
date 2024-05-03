@@ -132,5 +132,32 @@ router.get ("/messages", async (req, res) => {
     }
 })
 
+router.get("/login", (req, res) => {
+    res.render("login", {
+        title: "Login",
+        fileCss: "style.css"
+    })
+})
+
+router.get("/register", (req, res) => {
+    res.render("register", {
+        title: "Registro",
+        fileCss: "style.css"
+    })
+})
+
+router.get("/profile", (req, res) => {
+    if (!req.session.login) {
+        return res.redirect("/login");
+    }
+
+    const user = req.session.user
+    res.render("profile", {
+        title: `Perfil de ${req.session.user.first_name}`,
+        fileCss: "style.css",
+        user
+    })
+})
+
 
 export default router;

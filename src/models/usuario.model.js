@@ -9,5 +9,27 @@ const schema = new mongoose.Schema({
         type: String,
         require: true
     },
+    email: {
+        type: String,
+        require: true,
+        index: true,
+        unique: true
+    },
+    password: {
+        type: String,
+        require: true
+    },
+    age: {
+        type: Number,
+        require: true
+    },
+
+    role: {
+        type: String
+    }
     
 })
+
+const UserModel = mongoose.model("users", schema);
+
+export default UserModel;
