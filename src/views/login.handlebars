@@ -6,9 +6,14 @@
 
     <form class="lgForm" action="/api/sessions/login" method="POST">
         <input class="lgFormItem" type="email" name="email" placeholder="Usuario (e-Mail)" required>
-        <input class="lgFormItem" type="text" name="password" placeholder="Contraseña" required>
+        <div class="lgFormItem inLine">
+            <input class="lgFormPass" id="loginPass" type="password" name="password" placeholder="Contraseña" required>
+            <img class="ico" src="/img/noVisible.png" id="loginPass-ico" onclick="pass()" alt="">
+        </div>
         <button class="lgFormBtn" type="submit">Ingresar</button>
         <p>No estas reguistrado? <a class="loginLink" href="/register">Registrate!!</a></p>
     </form>
 
 </div>
+
+<script src="/js/util.js"></script>

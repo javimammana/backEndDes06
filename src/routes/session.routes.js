@@ -40,6 +40,7 @@ router.post("/login", async (req, res) => {
                 req.session.user = {
                     email: user.email,
                     first_name: user.first_name,
+                    last_name: user.last_name,
                     role: user.role
                 }
                 res.redirect("/products");
